@@ -72,8 +72,12 @@ if (login) {
       .then(res => res.json())
       .then(data => {
         if (data.message === "Sign in Successful!") {
-          console.log(data.token);
-          // window.location.href = "../pages/signin.html";
+          // Check if browser supports local storage
+          if (typeof Storage != "undefined") {
+            // Store token
+            localStorage.setItem("token", data.token);
+          }
+          window.location.href = "../pages/user_all_requests.html";
         } else {
           document.getElementById("message").innerHTML = data.message;
           document.getElementById("message").style.color = "red";
