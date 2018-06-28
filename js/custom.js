@@ -77,7 +77,44 @@ if (login) {
             // Store token
             localStorage.setItem("token", data.token);
           }
+          window.location.href = "../pages/user_make_request.html";
+        } else {
+          document.getElementById("message").innerHTML = data.message;
+          document.getElementById("message").style.color = "red";
+          document.getElementById("message").style.fontSize = "1.3rem";
+        }
+      })
+      .catch(error => console.error("Error:", error));
+  });
+}
+
+const token = localStorage.getItem("token");
+
+// Create Request
+let create_request = document.getElementById("request_form");
+if (create_request) {
+  create_request.addEventListener("submit", function(e) {
+    e.preventDefault();
+    let data = {
+      title: document.getElementById("title").value,
+      _type: document.getElementById("type").value,
+      description: document.getElementById("description").value,
+      category: document.getElementById("category").value,
+      area: document.getElementById("area").value
+    };
+    fetch("http://localhost:5000/api/v1/users/requests", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === "Request Created Successfully") {
           window.location.href = "../pages/user_all_requests.html";
+          console.log("Bearer " + token);
         } else {
           document.getElementById("message").innerHTML = data.message;
           document.getElementById("message").style.color = "red";
