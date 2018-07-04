@@ -32,13 +32,16 @@ if (signup) {
       password: document.getElementById("password").value,
       confirm_password: document.getElementById("confirm_password").value
     };
-    fetch("http://localhost:5000/api/v1/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
+    fetch(
+      "https://andela-maintenance-tracker-api.herokuapp.com/api/v1/auth/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    )
       .then(res => res.json())
       .then(data => {
         if (data.message === "Sign Up Successful") {
@@ -62,13 +65,16 @@ if (login) {
       username: document.getElementById("username").value,
       password: document.getElementById("password").value
     };
-    fetch("http://localhost:5000/api/v1/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
+    fetch(
+      "https://andela-maintenance-tracker-api.herokuapp.com/api/v1/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    )
       .then(res => res.json())
       .then(data => {
         if (data.message === "Sign in Successful!") {
@@ -102,14 +108,17 @@ if (create_request) {
       category: document.getElementById("category").value,
       area: document.getElementById("area").value
     };
-    fetch("http://localhost:5000/api/v1/users/requests", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
+    fetch(
+      "https://andela-maintenance-tracker-api.herokuapp.com/api/v1/users/requests",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }
+    )
       .then(res => res.json())
       .then(data => {
         if (data.message === "Request Created Successfully") {
