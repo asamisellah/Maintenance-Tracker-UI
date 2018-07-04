@@ -1,10 +1,13 @@
 const token = localStorage.getItem("token");
 
-fetch("http://localhost:5000/api/v1/users/requests", {
-  headers: {
-    Authorization: "Bearer " + token
+fetch(
+  "https://andela-maintenance-tracker-api.herokuapp.com/api/v1/users/requests",
+  {
+    headers: {
+      Authorization: "Bearer " + token
+    }
   }
-})
+)
   .then(res => res.json())
   .then(data => {
     let table = document.getElementById("table");
